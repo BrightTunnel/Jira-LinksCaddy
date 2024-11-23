@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="LinksCaddy-JiraCloudCheatSheet" content="width=device-width, initial-scale=1.0">
+    <title>Jira Cloud Cheat Sheet</title>
+	<script src="scrpts/rawdata.js" defer></script>
+	<script src="scrpts/linkscaddy.js" defer></script>
+    <style>
+		html, body {font-size:12px; font-family:Gisha,Arial,sans-serif; width:100%; height:100%; border:0px solid; margin:0px; margin-top:4px; text-align: center; background: var(--bgndpage); color:#808080;}
+        input, button {margin:4px;padding:4px;}
+        .tablecontainerclass {margin-top:2px;}
+        a {display: block; margin: 0px; text-decoration: none; color: blue;}
+        a:hover {text-decoration: underline;}
+		table {border-collapse: collapse; margin:0px auto;}
+		th, td {border:1px solid var(--bordercolor); padding:1px; text-align:left;}
+		th {background-color: var(--bgndhdr); color:var(--fonthdr); padding:4px; text-align: center;}
+</style>
+</head>
+<body>
+    <h1 style='color:#a08080;'>LinksCaddy - Jira Cheatsheet 'All direct links'</h1>
+	<input type="text" id="inputBoxBaseUrl" style="width:256px; background:#ffe8e8; text-align:center;" placeholder="Enter your Jira Cloud base URL" value=""/>
+	<div>
+		<label><input type="checkbox" id="opt0" onclick="buildAppSelection()" value="all" checked>all</label>
+        <label><input type="checkbox" id="opt1" onclick="buildAppSelection()" value="soft">soft</label>
+		<label><input type="checkbox" id="opt2" onclick="buildAppSelection()" value="jsm">jsm</label>
+		<label><input type="checkbox" id="opt3" onclick="buildAppSelection()" value="dc">dc</label>
+		<label><input type="checkbox" id="opt9" onclick="buildAppSelection()" value="unmapped">unmapped</label>
+	</div>
+	<div>
+		<input type="radio" id="rb0" onclick="selecturlstyle(0)" name="urllook" value="nourl" ><label for="rb0">no url</label>
+		<input type="radio" id="rb1" onclick="selecturlstyle(1)" name="urllook" value="fullurl" checked><label for="rb1">full url</label>
+        <input type="radio" id="rb2" onclick="selecturlstyle(2)" name="urllook" value="spliturl"><label for="rb2">split url</label>
+	</div>
+	<div class="tablecontainerclass" id="tablecontainerid"></div><br><br><br>
+	  <script>
+		function selecturlstyle(anurlstyle) {
+		    keyshowfullurl = anurlstyle;
+		    buildAppSelection();
+		}
+		function buildAppSelection() {
+		    const selected = document.querySelectorAll('input[type="checkbox"]');
+		    userCheckedApps = 0;
+		    selected.forEach(checkbox => {
+		        if (checkbox.checked) {
+		            switch (checkbox.value) {
+		            case 'dc':
+		                userCheckedApps += 1;
+		                break;
+		            case 'soft':
+		                userCheckedApps += 2;
+		                break;
+		            case 'jsm':
+		                userCheckedApps += 4;
+		                break;
+		            case 'unmapped':
+		                userCheckedApps += 8;
+		                break;
+		            case 'all':
+		                userCheckedApps += 16;
+		            }
+		        }
+		    });
+		    generateJiraCloudCheatSheet();
+		}
+		window.onload = function () {
+		    //-- Set the CSS variable using JavaScript
+		    document.documentElement.style.setProperty('--bordercolor', clrs.bordercolor);
+		    document.documentElement.style.setProperty('--bgndpage', clrs.bgndpage);
+		    document.documentElement.style.setProperty('--bgndhdr', clrs.bgndhdr);
+		    document.documentElement.style.setProperty('--fonthdr', clrs.fonthdr);
+		    //--
+		    readBaseUrlFromLocalStorage('LocalStorageTheBaseUrl');
+		    buildAppSelection();
+		};
+	 </script >
+</body>
+</html>
