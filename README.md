@@ -5,5 +5,5 @@ git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/BrightTunnel/Jira-LinksCaddy.git
+git remote add origin https://github.com/user-attachments/files/23401634/LinksCaddy-Guide.pdf
 git push -u origin main
