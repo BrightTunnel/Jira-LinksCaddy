@@ -1,6 +1,5 @@
 # Jira-LinksCaddy
 Jira DC/Cloud resources navigation linear map in Cloud
-echo "# Jira-LinksCaddy" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
